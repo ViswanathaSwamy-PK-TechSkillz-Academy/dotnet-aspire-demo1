@@ -1,0 +1,43 @@
+on:
+  push:
+    branches:
+    - swamy/01jul-work
+env:
+  DOTNET_CORE_VERSION: 7.0.x
+  CONTAINER_APP_ENVIRONMENT_NAME: ace-aspire-dev-003
+  RESOURCE_GROUP: rg-aspire-dev-003
+  CONTAINER_REGISTRY_NAME: acraspiredev003
+  CONTAINER_REGISTRY_LOGIN_SERVER: acraspiredev003.azurecr.io
+jobs:
+  BuildAndDeployContainerApp:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        include:
+        - appsourcepath: AspireDemo1.ApiService
+          containerappname: aspiredemo1.apiservice-container-app
+        - appsourcepath: AspireDemo1.Web
+          containerappname: aspiredemo1.web-container-app
+    steps:
+    - name: Checkout source code
+      uses: actions/checkout@v4
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: ${{ env.DOTNET_CORE_VERSION }}
+    - name: Azure login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.ace_aspire_dev_003_SPN }}
+    - name: Container App deploy
+      uses: azure/container-apps-deploy-action@v1
+      with:
+        appSourcePath: ${{ github.workspace }}/${{ matrix.appsourcepath }}
+        acrName: ${{ env.CONTAINER_REGISTRY_NAME }}
+        acrUsername: ${{ secrets.acraspiredev003_USERNAME_2E8E }}
+        acrPassword: ${{ secrets.acraspiredev003_PASSWORD_2E8E }}
+        imageToBuild: ${{ env.CONTAINER_REGISTRY_LOGIN_SERVER }}/${{ matrix.containerappname }}:${{ github.sha }}
+        containerAppName: ${{ matrix.containerappname }}
+        containerAppEnvironment: ${{ env.CONTAINER_APP_ENVIRONMENT_NAME }}
+        resourceGroup: ${{ env.RESOURCE_GROUP }}
