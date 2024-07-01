@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\dotnetaspire.demo1.AppHost\dotnetaspire.demo1.AppHost.csproj" />
+    <ProjectReference Include="..\AspireDemo1.AppHost\AspireDemo1.AppHost.csproj" />
   </ItemGroup>
 
   <ItemGroup>

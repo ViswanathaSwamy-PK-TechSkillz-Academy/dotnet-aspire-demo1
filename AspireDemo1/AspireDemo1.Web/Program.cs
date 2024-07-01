@@ -1,5 +1,5 @@
-using dotnetaspire.demo1.Web;
-using dotnetaspire.demo1.Web.Components;
+using AspireDemo1.Web;
+using AspireDemo1.Web.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 

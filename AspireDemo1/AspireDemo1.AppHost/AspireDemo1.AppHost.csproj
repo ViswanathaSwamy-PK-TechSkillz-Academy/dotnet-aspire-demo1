@@ -6,12 +6,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <IsAspireHost>true</IsAspireHost>
-    <UserSecretsId>82e61d3d-2ca4-4b60-b6cc-143ea6ce52ac</UserSecretsId>
+    <UserSecretsId>97a7af35-1d87-4d23-b32d-366b499852a8</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\dotnetaspire.demo1.ApiService\dotnetaspire.demo1.ApiService.csproj" />
-    <ProjectReference Include="..\dotnetaspire.demo1.Web\dotnetaspire.demo1.Web.csproj" />
+    <ProjectReference Include="..\AspireDemo1.ApiService\AspireDemo1.ApiService.csproj" />
+    <ProjectReference Include="..\AspireDemo1.Web\AspireDemo1.Web.csproj" />
   </ItemGroup>
 
   <ItemGroup>

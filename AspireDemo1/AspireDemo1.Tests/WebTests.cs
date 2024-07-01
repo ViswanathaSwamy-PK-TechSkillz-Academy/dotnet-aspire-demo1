@@ -1,6 +1,6 @@
 using System.Net;
 
-namespace dotnetaspire.demo1.Tests;
+namespace AspireDemo1.Tests;
 
 public class WebTests
 {
@@ -8,7 +8,7 @@ public class WebTests
     public async Task GetWebResourceRootReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.dotnetaspire.demo1_AppHost>();
+        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.AspireDemo1_AppHost>();
         await using var app = await appHost.BuildAsync();
         await app.StartAsync();
 

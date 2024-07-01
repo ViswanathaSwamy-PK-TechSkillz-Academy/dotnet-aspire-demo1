@@ -1,4 +1,4 @@
-namespace dotnetaspire.demo1.Web;
+namespace AspireDemo1.Web;
 
 public class WeatherApiClient(HttpClient httpClient)
 {
