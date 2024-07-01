@@ -39,29 +39,32 @@ jobs:
       - name: Install azd
         uses: Azure/setup-azd@v1.0.0
 
+      - name: Install .NET Aspire workload
+        run: dotnet workload install aspire
+
       - name: Log in with Azure (Federated Credentials)
         if: ${{ env.AZURE_CLIENT_ID != '' }}
         run: |
-          azd auth login `
-            --client-id "$Env:AZURE_CLIENT_ID" `
-            --federated-credential-provider "github" `
-            --tenant-id "$Env:AZURE_TENANT_ID"
+          azd auth login --client-id ${{ env.AZURE_CLIENT_ID }} --federated-credential-provider "github" --tenant-id ${{ env.AZURE_TENANT_ID }}
         shell: pwsh
 
-      - name: Log in with Azure (Client Credentials)
-        if: ${{ env.AZURE_CREDENTIALS != '' }}
-        run: |
-          $info = $Env:AZURE_CREDENTIALS | ConvertFrom-Json -AsHashtable;
-          Write-Host "::add-mask::$($info.clientSecret)"
+      # - name: Log in with Azure (Client Credentials)
+      #   if: ${{ env.AZURE_CREDENTIALS != '' }}
+      #   run: |
+      #     $info = $Env:AZURE_CREDENTIALS | ConvertFrom-Json -AsHashtable
+      #     Write-Host "::add-mask::$($info.clientSecret)"
 
-          azd auth login `
-            --client-id "$($info.clientId)" `
-            --client-secret "$($info.clientSecret)" `
-            --tenant-id "$($info.tenantId)"
-        shell: pwsh
+      #     azd auth login --client-id $($info.clientId) --client-secret $($info.clientSecret) --tenant-id $($info.tenantId)
+      #   shell: pwsh
+
+      - name: Print Environment Variables
+        run: env
+
+      - name: Set environment variables
+        run: echo "AZURE_LOCATION=eastus" >> $GITHUB_ENV
 
       - name: Provision Infrastructure
         run: azd provision --no-prompt
 
-      - name: Deploy Application
+      - name: Deploy Application to Azure
         run: azd deploy --no-prompt
