@@ -39,6 +39,9 @@ jobs:
       - name: Install azd
         uses: Azure/setup-azd@v1.0.0
 
+      - name: Install .NET Aspire workload
+        run: dotnet workload install aspire
+
       - name: Log in with Azure (Federated Credentials)
         if: ${{ env.AZURE_CLIENT_ID != '' }}
         run: |
@@ -54,8 +57,14 @@ jobs:
           azd auth login --client-id $($info.clientId) --client-secret $($info.clientSecret) --tenant-id $($info.tenantId)
         shell: pwsh
 
+      - name: Print Environment Variables
+        run: env
+
+      - name: Set environment variables
+        run: echo "AZURE_LOCATION=eastus" >> $GITHUB_ENV
+
       - name: Provision Infrastructure
         run: azd provision --no-prompt
 
-      - name: Deploy Application
+      - name: Deploy Application to Azure
         run: azd deploy --no-prompt
