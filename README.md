@@ -2,6 +2,8 @@
 
 I am learning .NET 8 Aspire from different Video Courses, Books, and Websites.
 
+[![CodeQL](https://github.com/ViswanathaSwamy-PK-TechSkillz-Academy/dotnet-aspire-demo1/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/ViswanathaSwamy-PK-TechSkillz-Academy/dotnet-aspire-demo1/actions/workflows/github-code-scanning/codeql)
+
 ## Features
 
 > 1. Default Sample
@@ -10,6 +12,6 @@ I am learning .NET 8 Aspire from different Video Courses, Books, and Websites.
 
 ## Few Commands
 
-```powershell
+```PowerShell
 D:\TSA\dotnet-aspire-demo1\AspireDemo1\AspireDemo1.AppHost> azd init
 ```
